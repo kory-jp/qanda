@@ -10,9 +10,47 @@
           <label>Content</label>
           <%= f.text_area :content, class: 'form-control' %>
         </div>
+
+
+        <div class="form-group">
+        <%= f.label :image %>
+        <p></P>
+        <%= f.file_field :image, id: :answer_image %>
+    
+        <script type="text/javascript">
+        $(function() {
+         function readURL(input) {
+           if (input.files && input.files[0]) {
+             var reader = new FileReader();
+             reader.onload = function (e) {
+               $('#image_prev').attr('src', e.target.result);
+             }
+             reader.readAsDataURL(input.files[0]);
+           }
+         }
+         $("#answer_image").change(function(){
+           readURL(this);
+         });
+        });
+        </script>
+    
+    
+    
+        <% if @question.image.present? %>
+      <%= image_tag @answer.image.url , id: :image_prev %>
+    <% else %>
+      <%= image_tag "sample.jpg", id: :image_prev %>
+    <% end %>
+    
+
         <div class="text-center">
           <%= f.submit "Update", class: 'btn btn-primary' %>
         </div>
+
+    <div>
+      <%= link_to 'Home', root_path %>
+    </div>
+
     </div>  
   <% end %>
 

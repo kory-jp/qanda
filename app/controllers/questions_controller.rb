@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    # @question = Question.find(params[:id])
+    @question = Question.find(params[:id])
     if @question.update(question_params)
       redirect_to root_path, notice: 'Success!'
     else
@@ -38,8 +38,20 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # 変更点ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+  # def upload
+  #   @question = current_user.question.build(question_params)
+  #   if @question.save
+  #     flash[:Success] = "Question created!"
+  #     redirect_to root_path
+  #   end
+  # end
+
+  # ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
   def destroy
-    # @question = Question.find(params[:id])
+    @question = Question.find(params[:id])
     @question.destroy
     redirect_to root_path, notice: 'Success!'
   end
@@ -52,7 +64,7 @@ class QuestionsController < ApplicationController
    end
 
   def question_params
-    params.require(:question).permit(:name, :title, :content)
+    params.require(:question).permit(:name, :title, :content, :image)
   end
   
 end
